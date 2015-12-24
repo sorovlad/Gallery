@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Галерея</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <script>
+    var curent = 0;
+    var viewCurentImage;
+    var images = document.getElementsByClassName('image-box');
+    var smallImages = document.getElementsByClassName('small-image');
+
+    window.onload = function reLoad()
+    {
+      images = document.getElementsByClassName('image-box');
+      smallImages = document.getElementsByClassName('small-image');   
+      reloadImage();
+    }
+    window.onresize = function()
+    {
+      reloadImage();
+    }
+
+    function displayImage(image) {
+
+      var viewImage = document.getElementById('view-image');
+      var bigImage = document.getElementById('big-image');
+      viewImage.classList.remove('hidden');
+      bigImage.src = "image/" + image.getAttribute('data-image-url');  
+
+      viewImage.classList.add('logo-loading');
+      viewCurentImage = image;
+
+      var viewImage = document.getElementById('loading');
+      viewImage.classList.remove('hidden');
+    };
+    function nextImage() {
+      var count = parseInt(window.innerWidth / 200);
+      for (var i = 0; i < smallImages.length - 1; i++) {
+        if (viewCurentImage === smallImages[i]) {
+          hiddenImage();
+          viewCurentImage = smallImages[i + 1];
+          displayImage(viewCurentImage);
+          break;
+        }
+      }
+    }
+    function beforeImage() {
+      for (var i = 1; i < smallImages.length; i++) {
+        if (viewCurentImage === smallImages[i]) {
+          hiddenImage();
+          viewCurentImage = smallImages[i - 1];
+          displayImage(viewCurentImage);
+          break;
+        }
+      }
+    }
+
+    function hiddenImage() {
+      var viewImage = document.getElementById('view-image');
+      viewImage.classList.add('hidden');
+      viewImage.classList.remove('logo-loading');
+    };
+    function imageLoaded() {
+      var viewImage = document.getElementById('loading');
+      viewImage.classList.add('hidden');
+    }
+    function reloadImage()
+    {
+      var count = parseInt(window.innerWidth / 200);
+      for (var i = 0; i < images.length; i++)
+      {
+        images[i].classList.add('hidden');
+      }
+      for (var i = curent; i < count + curent; i++)
+      {
+        images[i].classList.remove('hidden');
+      }
+    }
+    function toLeft()
+    {
+      if (curent === 0) {
+        return;
+      }
+      curent --;
+      reloadImage()
+    }
+    function toRight()
+    {
+      var count = parseInt(window.innerWidth / 200);
+      if (curent + count > images.length - 1) {
+        return;
+      }
+      curent ++;
+      reloadImage();
+    }
+  </script>
+  <body>
+    <article class="gallery">
+      <div class="button-left" onclick='toLeft()'></div>
+      <div class="image-box">
+        <img class="small-image" src="image/1.png" alt="" data-image-url="1b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/2.png" alt="" data-image-url="2b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/3.png" alt="" data-image-url="3b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/4.png" alt="" data-image-url="4b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/5.png" alt="" data-image-url="5b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/6.png" alt="" data-image-url="6b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/7.png" alt="" data-image-url="7b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="image-box">
+        <img class="small-image" src="image/8.png" alt="" data-image-url="8b.png" onclick='displayImage(this)'>
+      </div>
+      <div class="button-right" onclick='toRight()'></div>
+
+    <div id="view-image" class="view-image hidden">
+      <div class="button-left" onclick='beforeImage()'></div>
+      <div class="big-image">
+        <img id="big-image" src="image/no-image.png" alt="" onload="imageLoaded()"  onclick='hiddenImage()'>
+      </div>
+      <div id="loading" class="hidden">
+      </div>
+      <div class="button-right" onclick='nextImage()'></div>
+    </div>
+  </boby>
+</html>
