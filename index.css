@@ -68,10 +68,12 @@
 {
 	position: absolute;
 	z-index: 100;
-	/*width: 200px;*/
-	/*height: 200px;*/
+	top: calc(50% - 400px);
+	left: calc(50% - 400px);
+	width: 800px;
+	height: 800px;
 	background: url(image/loading.gif) center center no-repeat;
-	background-color: rgba(130, 130, 130, .8);
+	/*background-color: rgba(130, 130, 130, .8);*/
 }
 
 .hidden

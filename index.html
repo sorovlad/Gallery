@@ -29,7 +29,6 @@
       viewImage.classList.remove('hidden');
       bigImage.src = "image/" + image.getAttribute('data-image-url');  
 
-      viewImage.classList.add('logo-loading');
       viewCurentImage = image;
 
       var viewImage = document.getElementById('loading');
@@ -60,7 +59,9 @@
     function hiddenImage() {
       var viewImage = document.getElementById('view-image');
       viewImage.classList.add('hidden');
-      viewImage.classList.remove('logo-loading');
+      
+      var viewImage = document.getElementById('loading');
+      viewImage.classList.remove('hidden');
     };
     function imageLoaded() {
       var viewImage = document.getElementById('loading');
@@ -130,7 +131,7 @@
       <div class="big-image">
         <img id="big-image" src="image/no-image.png" alt="" onload="imageLoaded()"  onclick='hiddenImage()'>
       </div>
-      <div id="loading" class="hidden">
+      <div id="loading" class="hidden logo-loading">
       </div>
       <div class="button-right control-image-right" onclick='nextImage()'></div>
     </div>
