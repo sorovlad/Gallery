@@ -19,6 +19,21 @@
 	border-right: 50px solid #000;
 	border-radius: 50px;
 }
+.control-image-right,
+.control-image-left
+{
+	position: fixed;
+	top: 50%;
+}
+.control-image-left
+{
+	left: 20px;
+}
+.control-image-right
+{
+	right: 20px;
+}
+
 .button-left:hover
 {
 	border-left: 50px solid #777;
